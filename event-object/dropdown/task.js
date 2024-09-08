@@ -9,10 +9,10 @@ dropdowns.forEach(dropdown => {
 });
 
 function openDropdown(event) {
-  event.currentTarget.parentNode.querySelector('.dropdown__list').classList.add('dropdown__list_active');
+  event.currentTarget.parentNode.querySelector('.dropdown__list').classList.toggle('dropdown__list_active');
 }
 
 function setDropdownValue(event) {
   event.currentTarget.closest('.dropdown').querySelector('.dropdown__value').textContent = event.currentTarget.textContent.trim();
-  event.currentTarget.closest('.dropdown__list').classList.remove('dropdown__list_active');
+  event.currentTarget.closest('.dropdown__list').classList.toggle('dropdown__list_active');
 }
