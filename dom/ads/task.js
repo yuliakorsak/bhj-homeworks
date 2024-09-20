@@ -20,7 +20,7 @@ document.querySelectorAll('.rotator').forEach(rotator => {
   let index = 0;
   ads[index].style.color = ads[index].dataset.color;
 
-  let id = setInterval(rotate, ads[index].dataset.speed);
+  let id = setTimeout(rotate, ads[index].dataset.speed);
 
   function rotate() {
     if (ads[index].classList.contains("rotator__case_active")) {
@@ -31,8 +31,6 @@ document.querySelectorAll('.rotator').forEach(rotator => {
       ads[index].classList.add("rotator__case_active");
     }
     ads[index].style.color = ads[index].dataset.color;
-
-    clearInterval(id);
-    id = setInterval(rotate, ads[index].dataset.speed);
+    id = setTimeout(rotate, ads[index].dataset.speed);
   }
 });
