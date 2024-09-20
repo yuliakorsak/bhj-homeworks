@@ -19,18 +19,13 @@ document.querySelectorAll('.rotator').forEach(rotator => {
   const ads = rotator.querySelectorAll('.rotator__case');
   let index = 0;
   ads[index].style.color = ads[index].dataset.color;
-
-  let id = setTimeout(rotate, ads[index].dataset.speed);
+  setTimeout(rotate, ads[index].dataset.speed);
 
   function rotate() {
-    if (ads[index].classList.contains("rotator__case_active")) {
-      ads[index].classList.remove("rotator__case_active");
-    }
+    ads[index].classList.toggle("rotator__case_active");
     index = index === ads.length - 1 ? 0 : index + 1;
-    if (!ads[index].classList.contains("rotator__case_active")) {
-      ads[index].classList.add("rotator__case_active");
-    }
     ads[index].style.color = ads[index].dataset.color;
-    id = setTimeout(rotate, ads[index].dataset.speed);
+    ads[index].classList.toggle("rotator__case_active");
+    setTimeout(rotate, ads[index].dataset.speed);
   }
 });
