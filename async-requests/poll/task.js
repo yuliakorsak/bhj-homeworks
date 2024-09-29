@@ -31,9 +31,10 @@ function sendAnswer(pollId, answerId) {
     if (xhr.readyState === xhr.DONE) {
       const results = JSON.parse(xhr.responseText).stat;
       pollAnswers.innerHTML = '';
+      const sum = results.reduce((partialSum, res) => partialSum + res.votes, 0);
       results.forEach(item => {
         const result = document.createElement('div');
-        result.innerHTML = `${item.answer}: <span style="font-weight: bold">${item.votes}%</span>`;
+        result.innerHTML = `${item.answer}: <span style="font-weight: bold">${(item.votes/sum*100).toFixed(2)}%</span>`;
         pollAnswers.appendChild(result);
       });
     }
