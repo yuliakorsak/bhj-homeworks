@@ -1,4 +1,3 @@
-const cookies = document.cookie.split('; ');
 const login = getLoginCookie();
 if (login) {
   showWelcome(decodeURIComponent(login.substring(login.indexOf('=') + 1)));
@@ -27,6 +26,7 @@ else {
 }
 
 function getLoginCookie() {
+  const cookies = document.cookie.split('; ');
   return cookies.find(c => c.startsWith('login='));
 }
 
