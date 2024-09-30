@@ -33,7 +33,7 @@ function getLoginCookie() {
 
 function showWelcome(id) {
   const signin = document.getElementById('signin');
-  signin.querySelectorAll('input').forEach(input => input.value = '');
+  signin.querySelector('form').reset();
   signin.classList.remove('signin_active');
   const welcome = document.getElementById('welcome');
   welcome.classList.add('welcome_active');
