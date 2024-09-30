@@ -1,24 +1,25 @@
-const login = getLoginCookie();
-if (login) {
-  showWelcome(decodeURIComponent(login.substring(login.indexOf('=') + 1)));
-}
-else {
+login();
+
+function login() {
+  const login = getLoginCookie();
+  if (login) {
+    showWelcome(decodeURIComponent(login.substring(login.indexOf('=') + 1)));
+    return;
+  }
   const form = document.getElementById('signin__form');
   form.onsubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(form);
     const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === xhr.DONE) {
-        const response = JSON.parse(xhr.responseText);
-        if (response.success === true) {
-          showWelcome(response['user_id']);
-          document.cookie = 'login=' + encodeURIComponent(response['user_id']);
-        }
-        else {
-          alert('Неверный логин/пароль');
-        }
+    xhr.responseType = 'json';
+    xhr.onload = () => {
+      const response = xhr.response;
+      if (response.success === false) {
+        alert('Неверный логин/пароль');
+        return;
       }
+      showWelcome(response.user_id);
+      document.cookie = 'login=' + encodeURIComponent(response.user_id);
     };
     xhr.open('POST', 'https://students.netoservices.ru/nestjs-backend/auth');
     xhr.send(formData);

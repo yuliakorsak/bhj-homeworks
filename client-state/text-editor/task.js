@@ -1,15 +1,13 @@
 const editor = document.getElementById('editor');
-if (window.localStorage['TextEditorData']) {
-  editor.value = JSON.parse(window.localStorage['TextEditorData']);
-}
-editor.addEventListener('change', () => {
-  window.localStorage['TextEditorData'] = JSON.stringify(editor.value);
+editor.value = localStorage.getItem('textEditorData');
+editor.addEventListener('input', () => {
+  localStorage.setItem('textEditorData', editor.value);
 });
 
 const clearBtn = document.createElement('button');
 clearBtn.innerText = 'Очистить содержимое';
 clearBtn.onclick = () => {
   editor.value = '';
-  window.localStorage['TextEditorData'] = '';
+  localStorage.removeItem('textEditorData');
 };
 editor.insertAdjacentElement('afterend', clearBtn);
